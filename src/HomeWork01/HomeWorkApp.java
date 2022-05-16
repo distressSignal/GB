@@ -20,6 +20,7 @@ public class HomeWorkApp {
         }
     }
 
+
     private static void printColor() {
         int value = 3;
         if (value <= 0) {
