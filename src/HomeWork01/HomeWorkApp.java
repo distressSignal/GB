@@ -3,7 +3,6 @@ package HomeWork01;
 
 public class HomeWorkApp {
 
-
     public static void main(String[] args) {
         printThreeWords();
         checkSumSign();
