@@ -10,7 +10,6 @@ public class HomeWorkApp {
         printColor();
         compareNumbers();
     }
-
     private static void compareNumbers() {
         int a = 1;
         int b = 3;
