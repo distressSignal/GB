@@ -8,7 +8,6 @@ public class HomeWorkApp {
         checkSumSign();
         printColor();
         compareNumbers();
-
     }
 
     private static void compareNumbers() {
