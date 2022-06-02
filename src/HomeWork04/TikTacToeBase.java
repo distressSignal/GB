@@ -3,50 +3,24 @@ package HomeWork04;
 import java.util.Random;
 import java.util.Scanner;
 
-public class TikTacToeExte {
-    private static final String SPACE_MAP = " ";
-    private static final int SIZE = 9;
+public class TikTacToeBase {
+
+    public static final String SPACE_MAP = " ";
+    private static final int SIZE = 4;
     private static final char DOT_EMP = '.';
     private static final char DOT_Hum = 'X';
     private static final char AI = '0';
     private static final String HEADER_FIR_SYM = "*";
     private static final char[][] MAP = new char[SIZE][SIZE];
-    private static int columnNumber;
-    private static int rowNumber;
-    private static int turnCount = 0;
-    private static final int victoryToken = 3;
+    private static int turnCount=0;
 
-    private static final Scanner in = new Scanner(System.in);
-    private static final Random random = new Random();
+    private static Scanner in = new Scanner(System.in);
+    private static Random random = new Random();
 
-
-    public static void turnGame() {
-        do {
-
-            System.out.println("Игра начинается");
-            init();
-            printMap();
-            playGame();
-        } while (isContinueGame());
-        endGame();
-    }
-
-    private static void endGame() {
-        in.close();
-        System.out.println("Ты заходи, если что");
-    }
-
-    private static boolean isContinueGame() {
-        System.out.println("Хотите продолжить? y\\n");
-        return switch (in.next()) {
-            case "y", "yes", "+", "да", "д" -> true;
-            default -> false;
-        };
-    }
-
-    private static void init() {
-        turnCount = 0;
+    public static void main(String[] args) {
         initMAP();
+        printMap();
+        playGame();
     }
 
 
@@ -89,9 +63,9 @@ public class TikTacToeExte {
         while (true) {
             humanTurn();
             printMap();
-            if (ckeckEnd(DOT_Hum)) {
-                break;
-            }
+           if (ckeckEnd(DOT_Hum)) {
+               break;
+           }
 
             aiTurn();
             printMap();
@@ -103,8 +77,8 @@ public class TikTacToeExte {
     }
 
     private static boolean ckeckEnd(char symbol) {
-        if (checkWin(symbol)) {
-            if (symbol == DOT_Hum) {
+        if (checkWin(symbol)){
+            if (symbol == DOT_Hum){
                 System.out.println("Вы победили");
             } else {
                 System.out.println("Восстание близко");
@@ -112,7 +86,7 @@ public class TikTacToeExte {
             return true;
 
         }
-        if (checkDraw()) {
+        if (checkDraw()){
             System.out.println("Ничья");
             return true;
 
@@ -122,62 +96,42 @@ public class TikTacToeExte {
     }
 
     private static boolean checkDraw() {
-
-        return turnCount >= SIZE * SIZE;
+//        for (char[] chars : MAP) {
+//            for (char symbol : chars) {
+//                if (symbol == DOT_EMP) {
+//                    return false;
+//                }
+//
+//            }
+//        }
+//        return false;
+        return turnCount >= SIZE* SIZE;
     }
 
     private static boolean checkWin(char symbol) {
-
-
-        if (checkX() || checkY()) {
-            return true;
-        }
+        if(MAP[0][0] == symbol && MAP[0][1] == symbol && MAP[0][2] == symbol) return true;
+        if(MAP[1][0] == symbol && MAP[1][1] == symbol && MAP[1][2] == symbol) return true;
+        if(MAP[2][0] == symbol && MAP[2][1] == symbol && MAP[2][2] == symbol) return true;
+        if(MAP[0][0] == symbol && MAP[1][0] == symbol && MAP[2][0] == symbol) return true;
+        if(MAP[0][1] == symbol && MAP[1][1] == symbol && MAP[2][1] == symbol) return true;
+        if(MAP[0][2] == symbol && MAP[1][2] == symbol && MAP[2][2] == symbol) return true;
+        if(MAP[0][0] == symbol && MAP[1][1] == symbol && MAP[2][2] == symbol) return true;
+        if(MAP[2][0] == symbol && MAP[1][1] == symbol && MAP[0][2] == symbol) return true;
         return false;
-
     }
 
-    private static boolean checkY() {
-        int count = victoryToken;
-        char c = MAP[rowNumber][columnNumber];
-        for (int i = 0; i < MAP.length; i++) {
-            if (c == MAP[i][columnNumber]) {
-                count--;
-
-            }
-        }
-        if (count == 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private static boolean checkX() {
-        int count = victoryToken;
-        char c = MAP[rowNumber][columnNumber];
-        for (int i = 0; i < MAP.length; i++) {
-            if (c == MAP[rowNumber][i]) {
-                count--;
-
-            }
-        }
-        if (count == 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     private static void humanTurn() {
         System.out.println("ход Человека");
-
+        int rowNumber;
+        int columnNumber;
 
         while (true) {
             System.out.println("Введите координату");
-            rowNumber = getValidNumberFromScanner() - 1;
+            rowNumber = in.nextInt() - 1;
 
             System.out.println("Введите координату");
-            columnNumber = getValidNumberFromScanner() - 1;
+            columnNumber = in.nextInt() - 1;
 
             if (isaCellFree(rowNumber, columnNumber)) {
                 break;
@@ -188,26 +142,6 @@ public class TikTacToeExte {
 
         MAP[rowNumber][columnNumber] = DOT_Hum;
         turnCount++;
-    }
-
-    private static int getValidNumberFromScanner() {
-        while (true) {
-            if (in.hasNext()) {
-                int n = in.nextInt();
-                if (isNumberValid(n)) {
-                    return n;
-                } else {
-                    System.out.println("Проверьте значение координаты должно быть от 1 до " + SIZE);
-                }
-            } else {
-                System.out.println("!!!!Вводи допускает лишь целые числа");
-                in.next();
-            }
-        }
-    }
-
-    private static boolean isNumberValid(int n) {
-        return n >= 1 && n <= SIZE;
     }
 
     private static boolean isaCellFree(int rowNumber, int columnNumber) {
@@ -221,12 +155,12 @@ public class TikTacToeExte {
         do {
             rowNumber = random.nextInt(SIZE);
             columnNumber = random.nextInt(SIZE);
-        } while (!isaCellFree(rowNumber, columnNumber));
+        } while (!isaCellFree(rowNumber,columnNumber));
 
         MAP[rowNumber][columnNumber] = AI;
         turnCount++;
 
     }
 
-}
+    }
 
