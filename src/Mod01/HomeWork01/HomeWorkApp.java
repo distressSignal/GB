@@ -1,8 +1,7 @@
-package HomeWork01;
+package Mod01.HomeWork01;
 
 
 public class HomeWorkApp {
-
 
     public static void main(String[] args) {
         printThreeWords();
