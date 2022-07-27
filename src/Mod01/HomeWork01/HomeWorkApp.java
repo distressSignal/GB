@@ -1,16 +1,15 @@
-package HomeWork01;
+package Mod01.HomeWork01;
 
 
 public class HomeWorkApp {
+
 
     public static void main(String[] args) {
         printThreeWords();
         checkSumSign();
         printColor();
         compareNumbers();
-
     }
-
     private static void compareNumbers() {
         int a = 1;
         int b = 3;
@@ -20,6 +19,7 @@ public class HomeWorkApp {
             System.out.println("a < b");
         }
     }
+
 
     private static void printColor() {
         int value = 3;
