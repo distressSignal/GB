@@ -57,12 +57,8 @@ public class ClientHandler {
             switch (typeMessage) {
                 case STOP_SERVER_CMD_PREFIX -> myServer.stop();
                 case END_CLIENT_CMD_PREFIX -> closeConnection();
-                case PRIVATE_MSG_CMD_PREFIX -> {//TODO:
-//                    String nik = message.split("\\s+")[1];
-//                    int a = message.indexOf(nik);
-//                    String result = message.substring(a+nik.length()).trim();
-//                    myServer.broadcastMessageTest(this, nik, result);
-                    myServer.broadcastMessageTest(this, message);
+                case PRIVATE_MSG_CMD_PREFIX -> {
+                    myServer.privateMessages(this, message);
 
                 }
                 default -> myServer.broadcastMessage(this, message);

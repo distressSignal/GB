@@ -83,19 +83,15 @@ public class MyServer {
         }
     }
 
-    public void broadcastMessageTest(ClientHandler sender,  String message) throws IOException {
+    public void privateMessages(ClientHandler sender, String message) throws IOException {
         String nik = message.split("\\s+")[1];
-//                    int a = message.indexOf(nik);
-//                    String result = message.substring(a+nik.length()).trim();
-//                    myServer.broadcastMessageTest(this, nik, result);
-
         int a = message.indexOf(nik);
         String result = message.substring(a + nik.length()).trim();
 
         for (ClientHandler client : clients) {
             if (client.getUsername().equals(nik)) {
 
-                client.PrivateSendMessage(sender.getUsername(),message);
+                client.PrivateSendMessage(sender.getUsername(),result);
 
             }
         }
